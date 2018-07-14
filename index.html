@@ -47,7 +47,7 @@
         亲爱的你现在还好吗         </span>
 
 <p id = "test"></p>
-<audio src="123.mp3" autoplay loop></audio>
+<audio id="audio" src="123.mp3" autoplay loop></audio>
 <script >
     var text = "这辈子我们还能在一起么？I MISS YOU";
     var num = text.length;
@@ -62,7 +62,25 @@
         }
     }
     var done=setInterval("show()",1000);
-
+//--创建页面监听，等待微信端页面加载完毕 触发音频播放
+document.addEventListener('DOMContentLoaded', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+            audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio.play();
+        }, false);
+    }
+    audioAutoPlay();
+});
+//--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+document.addEventListener('touchstart', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+            audio.play();
+    }
+    audioAutoPlay();
+});
 
 </script>
 </body>
